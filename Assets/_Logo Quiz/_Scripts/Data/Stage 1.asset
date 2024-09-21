@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58bf4ad76cd67f43935847457480868, type: 3}
+  m_Name: Stage 1
+  m_EditorClassIdentifier: 
+  blankNumber: 6
+  logo: {fileID: 21300000, guid: de4a2f0ba9622b841b5e0939f1e3f7cd, type: 3}
+  answer: ADIDAS
+  alphabets:
+  - {fileID: 21300000, guid: 8e9f50a07410e24478730aad159ebee3, type: 3}
+  - {fileID: 21300000, guid: d67c1e45bc54e4849acfb74ddad35287, type: 3}
+  - {fileID: 21300000, guid: a40841399e9026b4ab45298e730615ec, type: 3}
+  - {fileID: 21300000, guid: d67c1e45bc54e4849acfb74ddad35287, type: 3}
+  - {fileID: 21300000, guid: 8e9f50a07410e24478730aad159ebee3, type: 3}
+  - {fileID: 21300000, guid: 214f065c89951f6439b3b4cb514cadc4, type: 3}
+  - {fileID: 21300000, guid: eda498849152af946afa8a0d4e73771b, type: 3}
+  - {fileID: 21300000, guid: 65069731b13884e4b846d2d7e5c25590, type: 3}
+  - {fileID: 21300000, guid: d1ddffefa37f62045a192ec3e3f73388, type: 3}
+  - {fileID: 21300000, guid: d34c9e05db19f524c9691a1625e68b1f, type: 3}
+  - {fileID: 21300000, guid: 50d1457e5cfddc94f967e5a62e3f5de8, type: 3}
+  - {fileID: 21300000, guid: eb78dfebba91d9d4f87cdbe1addf5592, type: 3}
