@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58bf4ad76cd67f43935847457480868, type: 3}
+  m_Name: Stage 9
+  m_EditorClassIdentifier: 
+  blankNumber: 7
+  logo: {fileID: 21300000, guid: 21024f5df0bd0254ba18ec013af342aa, type: 3}
+  answer: JETPUNK
+  alphabets:
+  - {fileID: 21300000, guid: 0e089d680ef3e214e9014bfefd0cecff, type: 3}
+  - {fileID: 21300000, guid: 65069731b13884e4b846d2d7e5c25590, type: 3}
+  - {fileID: 21300000, guid: a40841399e9026b4ab45298e730615ec, type: 3}
+  - {fileID: 21300000, guid: d1ddffefa37f62045a192ec3e3f73388, type: 3}
+  - {fileID: 21300000, guid: 9146b78d4845b794c9b167c7ca6dc099, type: 3}
+  - {fileID: 21300000, guid: 71567b97a41ef2948bf260bbd930c968, type: 3}
+  - {fileID: 21300000, guid: d34c9e05db19f524c9691a1625e68b1f, type: 3}
+  - {fileID: 21300000, guid: 2ecc098d4733951458d5f0b6ca1b8392, type: 3}
+  - {fileID: 21300000, guid: 50d1457e5cfddc94f967e5a62e3f5de8, type: 3}
+  - {fileID: 21300000, guid: 214f065c89951f6439b3b4cb514cadc4, type: 3}
+  - {fileID: 21300000, guid: eb78dfebba91d9d4f87cdbe1addf5592, type: 3}
+  - {fileID: 21300000, guid: d1ddffefa37f62045a192ec3e3f73388, type: 3}

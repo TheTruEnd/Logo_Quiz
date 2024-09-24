@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +14,10 @@ public class StageManager : Singleton<StageManager>
     public HorizontalLayoutGroup blankGroup;
     public GridLayoutGroup alphabetGroup;
 
+    public List<Blank> blankList;
+    public List<Alphabet> alphabetList;
+
+    public string rightAnswer;
     public void Init()
     {
 
@@ -18,8 +25,17 @@ public class StageManager : Singleton<StageManager>
 
     private void OnEnable()
     {
+        rightAnswer = data.answer.ToUpper();
         CreateBlanks();
         CreateAlphabets();
+        StartCoroutine(DeactiveLayoutGroup());
+        EventDispatcher.Instance.RegisterListener(EventID.On_Player_Fill_All_Blanks, CheckIfPlayerFillAllBlanks);
+    }
+
+    private void OnDisable()
+    {
+        EventDispatcher.Instance.RemoveListener(EventID.On_Player_Fill_All_Blanks, CheckIfPlayerFillAllBlanks);
+
     }
 
     private void CreateBlanks()
@@ -27,9 +43,10 @@ public class StageManager : Singleton<StageManager>
         for (int i = 0; i < data.blankNumber; i++)
         {
             var blank = PoolingManager.Spawn(blankPrefab, transform.position, quaternion.identity);
-            blank.transform.SetParent(blankGroup.transform);
+            blank.transform.SetParent(blankGroup.GetComponent<RectTransform>());
             blank.transform.localScale = Vector3.one;
             blank.name = "Blank " + (i + 1);
+            blankList.Add(blank);
         }
     }
 
@@ -39,10 +56,82 @@ public class StageManager : Singleton<StageManager>
         for (int i = 0; i < data.alphabets.Count; i++)
         {
             var alphabet = PoolingManager.Spawn(alphabetPrefab, transform.position, quaternion.identity);
-            alphabet.transform.SetParent(alphabetGroup.transform);
+            alphabet.id = i;
+            alphabet.transform.SetParent(alphabetGroup.GetComponent<RectTransform>());
             alphabet.transform.localScale = Vector3.one;
             alphabet.name = "Alphabet " + (i + 1);
             alphabet.image.sprite = data.alphabets[i];
+            alphabetList.Add(alphabet);
+            
+        }
+    }
+
+    private IEnumerator DeactiveLayoutGroup()
+    {
+        yield return null;
+        yield return null;
+        blankGroup.enabled = false;
+        alphabetGroup.enabled = false;
+    }
+
+    public void GetFirstNotFilledBlank(Alphabet alphabet)   
+    {
+        for (int i = 0; i < blankList.Count; i++)
+        {
+            if (!blankList[i].isFilled)
+            {
+                alphabet.transform.SetParent(blankGroup.transform);
+                alphabet.SetTarget(blankList[i]);
+                break;
+            }
+        }
+    }
+
+    public void ResetAlphabet(Alphabet alphabet)
+    {
+        alphabet.transform.SetParent(alphabetGroup.transform);
+        alphabet.SetTarget(null);
+    }
+
+    public bool IsPlayerFillAllBlanks()
+    {
+        for (int i = 0; i < blankList.Count; i++)
+        {
+            if (!blankList[i].isFilled)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void CheckIfPlayerFillAllBlanks(object param)
+    {
+        if (!IsPlayerFillAllBlanks())
+        {
+            return;
+        }
+        string playerAnswer = "";
+        for (int i = 0; i < blankList.Count; i++)
+        {
+            playerAnswer += data.alphabets[blankList[i].alphabetIndex].name;
+        }
+        
+        var check = String.CompareOrdinal(playerAnswer.ToUpper(), rightAnswer.ToUpper());
+        if (check == 0)
+        {
+            EventDispatcher.Instance.PostEvent(EventID.On_Player_Win);
+        }
+        else
+        {
+            for (int i = 0; i < blankList.Count; i++)
+            {
+                if (playerAnswer[i] != rightAnswer[i])
+                {
+                    alphabetList[blankList[i].alphabetIndex].BackAnchorPosition();
+                }
+            }
         }
     }
 }
